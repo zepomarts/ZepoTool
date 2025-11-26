@@ -1,23 +1,2 @@
 @import "tailwindcss";
 
-/* --- Theme 1: Brand tokens --- */
-:root{
-  --primary: #2563eb;      /* blue */
-  --primary-600: #1d4ed8;
-  --muted: #6b7280;
-  --bg: #f3f6f9;
-  --panel: #ffffff;
-  --accent: #06b6d4;
-  --radius: 12px;
-  --border: rgba(15,21,55,0.08);
-}
-
-/* small helpers */
-.btn-primary{
-  background: linear-gradient(90deg,var(--primary),var(--primary-600));
-  color: white;
-  border-radius: var(--radius);
-}
-.shadow-soft{
-  box-shadow: 0 6px 18px rgba(15,21,55,0.06);
-}
