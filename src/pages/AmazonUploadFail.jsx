@@ -10,7 +10,7 @@ export default function AmazonUploadFail() {
     try {
       setLoading(true);
       setError("");
-      const res = await fetch("http://localhost:4000/api/uploads");
+      const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/uploads`);
       const json = await res.json();
       const list = json?.data ?? json ?? [];
       setUploads(Array.isArray(list) ? list : []);
@@ -34,7 +34,7 @@ export default function AmazonUploadFail() {
       form.append("file", file);
       form.append("marketplace", "amazon");
 
-      const res = await fetch("http://localhost:4000/api/uploads", {
+      const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/uploads`, {
         method: "POST",
         body: form,
       });
@@ -149,7 +149,7 @@ export default function AmazonUploadFail() {
 
                         {/* ANALYZE BTN */}
                         <button
-                          onClick={() => window.open(`http://localhost:4000/api/analyze/${u._id}`)}
+                          onClick={() => window.open(`${import.meta.env.VITE_SERVER_URL}/api/analyze/${u._id}`)}
                           className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg shadow transition-transform hover:-translate-y-1 text-xs"
                         >
                           Analyze
@@ -160,7 +160,7 @@ export default function AmazonUploadFail() {
                           onClick={async () => {
                             if (!confirm("Delete this file?")) return;
                             const res = await fetch(
-                              `http://localhost:4000/api/uploads/${u._id}`,
+                              `${import.meta.env.VITE_SERVER_URL}/api/uploads/${u._id}`,
                               { method: "DELETE" }
                             );
                             if (res.ok) fetchUploads();
@@ -172,7 +172,7 @@ export default function AmazonUploadFail() {
 
                         {/* DOWNLOAD BTN */}
                         <button
-                          onClick={() => window.open(`http://localhost:4000/uploads/${u.filename}`)}
+                          onClick={() => window.open(`${import.meta.env.VITE_SERVER_URL}/uploads/${u.filename}`)}
                           className="w-9 h-9 bg-emerald-600 hover:bg-emerald-700 text-white rounded-full flex items-center justify-center shadow transition"
                         >
                           ⬇

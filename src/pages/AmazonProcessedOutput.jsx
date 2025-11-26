@@ -33,7 +33,7 @@ const sheetNames = [
 async function loadFiles() {
   setLoading(true);
   try {
-    const res = await fetch("http://localhost:4000/api/processed/list");
+    const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/processed/list`);
     const json = await res.json();
 
     if (json.success) {
@@ -64,9 +64,9 @@ async function selectFile(fileId) {
     setLoading(true);
 
     const [sRes, fRes, tRes] = await Promise.all([
-      axios.get(`http://localhost:4000/api/processed/summary/${fileId}`),
-      axios.get(`http://localhost:4000/api/processed/filters/${fileId}`),
-      axios.get(`http://localhost:4000/api/processed/top-selling/${fileId}`)
+      axios.get(`${import.meta.env.VITE_SERVER_URL}/api/processed/summary/${fileId}`),
+      axios.get(`${import.meta.env.VITE_SERVER_URL}/api/processed/filters/${fileId}`),
+      axios.get(`${import.meta.env.VITE_SERVER_URL}/api/processed/top-selling/${fileId}`)
     ]);
 
     // summary
@@ -101,7 +101,7 @@ async function selectFile(fileId) {
 
     try {
       // Preferred: backend provides a sheet endpoint
-      const res = await axios.get(`http://localhost:4000/api/processed/sheet/${fileId}/${sheetName}`);
+      const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/processed/sheet/${fileId}/${sheetName}`);
       if (res.data?.rows) {
         setSheetRows(res.data.rows || []);
       } else if (Array.isArray(res.data)) {
@@ -111,7 +111,7 @@ async function selectFile(fileId) {
       } else {
         // fallback: if sheet endpoint not implemented, try summary for order_summery
         if (sheetName === "order_summery") {
-          const sumRes = await axios.get(`http://localhost:4000/api/processed/summary/${fileId}`)
+          const sumRes = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/processed/summary/${fileId}`)
 ;
           setSheetRows(sumRes.data?.rows || []);  
         } else {
@@ -142,7 +142,7 @@ async function selectFile(fileId) {
     const body = { fileId: selectedFile, ...(payload || {}) };
     setLoading(true);
     try {
-  const res = await axios.post("http://localhost:4000/api/processed/filter-results", body);
+  const res = await axios.post("${import.meta.env.VITE_SERVER_URL}/api/processed/filter-results", body);
       // endpoint returns { count, sales, cogs, profit, rows }
       if (res.data) {
         setFilteredRows(res.data.rows || []);

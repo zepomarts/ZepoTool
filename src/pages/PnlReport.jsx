@@ -18,7 +18,7 @@ export default function PnlReport() {
     async function loadData() {
       try {
         setLoading(true);
-        const res = await axios.get("http://localhost:4000/api/pnl"); // optionally add ?fileId=
+        const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/pnl`); // optionally add ?fileId=
         if (!active) return;
         if (res.data) {
           setMonths(res.data.months || []);

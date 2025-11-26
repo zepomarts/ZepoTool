@@ -5,7 +5,7 @@ export default function MasterFileEdit() {
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:4000/api/master/view").then((res) => {
+    axios.get(`${import.meta.env.VITE_SERVER_URL}/api/master/view`).then((res) => {
       setRows(res.data);
     });
   }, []);
@@ -19,7 +19,7 @@ export default function MasterFileEdit() {
   };
 
   const save = async () => {
-    await axios.post("http://localhost:4000/api/master/save", { rows });
+    await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/master/save`, { rows });
     alert("Master updated!");
   };
 

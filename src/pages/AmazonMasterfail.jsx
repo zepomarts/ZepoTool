@@ -11,7 +11,7 @@ export default function MasterFilePage() {
 
   // Load master summary
   const loadMaster = async () => {
-    const res = await fetch("http://localhost:4000/api/master/info");
+    const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/master/info`);
     const json = await res.json();
     if (json.exists) setMasterInfo(json);
     else setMasterInfo(null);
@@ -31,7 +31,7 @@ useEffect(() => {
     const form = new FormData();
     form.append("file", file);
 
-    const res = await fetch("http://localhost:4000/api/master/upload", {
+    const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/master/upload`, {
       method: "POST",
       body: form,
     });
@@ -48,14 +48,14 @@ useEffect(() => {
 
   // Load rows for View or Edit mode
   const loadRows = async () => {
-    const res = await axios.get("http://localhost:4000/api/master/view");
+    const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/master/view`);
     // backend returns { success, rows }
     setRows(res.data.rows || []);
   };
 
   // Save edited master file
   const saveRows = async () => {
-    await axios.post("http://localhost:4000/api/master/save", { rows });
+    await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/master/save`, { rows });
     alert("Master updated!");
     setMode("none");
     loadMaster();

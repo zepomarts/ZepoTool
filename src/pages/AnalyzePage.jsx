@@ -5,7 +5,7 @@ export default function AnalyzePage() {
   const { id } = useParams();
 
   useEffect(() => {
- window.location.href = `http://localhost:4000/api/analyze/${id}`;
+ window.location.href = `${import.meta.env.VITE_SERVER_URL}/api/analyze/${id}`;
 
   }, [id]);
 

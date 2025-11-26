@@ -5,7 +5,7 @@ export default function GlobalView() {
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:4000/api/dashboard/global")
+    axios.get(`${import.meta.env.VITE_SERVER_URL}/api/dashboard/global`)
       .then(res => setRows(res.data));
   }, []);
 

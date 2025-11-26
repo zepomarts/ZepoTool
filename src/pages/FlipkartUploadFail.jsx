@@ -6,7 +6,7 @@ export default function FlipkartUploadFail() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const API = "http://localhost:4000/api/flipkart/uploads";
+  const API = `${import.meta.env.VITE_SERVER_URL}/api/flipkart/uploads`;
 
   // Load uploads
   async function fetchUploads() {
@@ -149,7 +149,7 @@ export default function FlipkartUploadFail() {
 
                         {/* ANALYZE BUTTON */}
                         <button
-                           onClick={() => window.open(`http://localhost:4000/api/flipkart/analyze/${u._id}`)}
+                           onClick={() => window.open(`${import.meta.env.VITE_SERVER_URL}/api/flipkart/analyze/${u._id}`)}
                            className="px-4 py-2 bg-blue-600 text-white rounded"
                           >
                          Analyze
@@ -166,7 +166,7 @@ export default function FlipkartUploadFail() {
 
                         {/* DOWNLOAD */}
                         <button
-                          onClick={() => window.open(`http://localhost:4000/flipkart/${u.filename}`)}
+                          onClick={() => window.open(`${import.meta.env.VITE_SERVER_URL}/flipkart/${u.filename}`)}
                           className="w-9 h-9 flex items-center justify-center rounded-full bg-emerald-600 hover:bg-emerald-700 text-white shadow"
                         >
                           ⬇

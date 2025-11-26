@@ -14,7 +14,7 @@ export default function Dashboard() {
     async function loadDashboard() {
       setLoading(true);
       try {
-        const res = await axios.get("http://localhost:4000/api/dashboard");
+        const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/dashboard`);
         if (res.data.success) {
           setData(res.data);
         }
